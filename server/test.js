@@ -10,15 +10,18 @@ const client = new speech.SpeechClient();
  */
 
 async function main() {
-    const filename = './test.wav';
-    const encoding = 'LINEAR16';
-    const sampleRateHertz = 48000;
+    const filename = './test3.mp3';
+    const encoding = 'MP3';
+    const sampleRateHertz = 44100;
+    const channelCount = 2;
     const languageCode = 'en-US';
 
     const config = {
+        enableWordTimeOffsets: true,
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
+        channelCount: channelCount,
     };
 
     /**
@@ -40,6 +43,22 @@ async function main() {
         .map(result => result.alternatives[0].transcript)
         .join('\n');
     console.log(`Transcription: ${transcription}`);
+
+    response.results.forEach(result => {
+        const alternatives = result.alternatives[0];
+        alternatives.words.forEach(wordInfo => {
+            const startSecs =
+            `${wordInfo.startTime.seconds}` +
+            '.' +
+            wordInfo.startTime.nanos / 100000000;
+            const endSecs =
+            `${wordInfo.endTime.seconds}` +
+            '.' +
+            wordInfo.endTime.nanos / 100000000;
+          console.log(`Word: ${wordInfo.word}`);
+          console.log(`\t ${startSecs} secs - ${endSecs} secs`);
+        });
+    });
 }
 
 main().catch(console.error);
