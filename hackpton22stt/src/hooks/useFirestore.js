@@ -1,24 +1,30 @@
 import { useState, useEffect } from 'react';
-import { projectFirestore } from '../firebase/config';
+import { projectFirestore, projectStorage } from '../firebase/config';
+import { ref, getMetadata, } from 'firebase/storage';
 
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const unsub = projectFirestore.collection(collection)
-      .orderBy('createdAt', 'desc')
-      .onSnapshot(snap => {
-        let documents = [];
-        snap.forEach(doc => {
-          documents.push({...doc.data(), id: doc.id});
-        });
-        setDocs(documents);
+    const unsubscribe = projectFirestore
+      .collection(collection)
+      .onSnapshot((snap) => {
+        snap.forEach(async (doc) => {
+          try {
+            const forestRef = ref(projectStorage, doc.data().url);
+            const metadata = await getMetadata(forestRef);
+            setDocs(documents => [
+              ...documents,
+              { ...doc.data(), metadata, id: doc.id }
+            ]);
+          } catch(error) {
+            console.log(error);
+          };
+        });  
       });
-
-    return () => unsub();
-    // this is a cleanup function that react will run when
-    // a component using the hook unmounts
-  }, [collection]);
+  
+    return unsubscribe;
+  }, []);
 
   return { docs };
 }

@@ -10,7 +10,6 @@ const Upload = () => {
     const [file, setFile] = useState(null);
     const types = ['audio/mp3', 'audio/wav', 'audio/m4a', 'audio/flac', 'audio/ogg', 'audio/x-m4a', 'audio/x-flac', 'audio/x-wav', 'audio/mpeg'];
     const [error, setError] = useState(null);
-    const data = '';
         
  
         

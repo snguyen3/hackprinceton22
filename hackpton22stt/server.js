@@ -23,8 +23,9 @@ function speechRec (filename, encoding, sampleRateHertz, languageCode, channelCo
             content: fs.readFileSync(filename).toString('base64'),
         },
     };
+
     
-    return client.recognize(request)
+    return client.recognize(request);
 
 
     /*const transcription = response.results
