@@ -18,6 +18,7 @@ function speechRec (filename, encoding, sampleRateHertz, languageCode, channelCo
             sampleRateHertz: sampleRateHertz,
             languageCode: languageCode,
             channelCount: channelCount,
+            enableAutomaticPunctuation: true,
         },
         audio: {
             content: fs.readFileSync(filename).toString('base64'),
@@ -57,9 +58,13 @@ app.get('/speech', (req, res) => {
     speechRec('./test3.mp3', 'MP3', 44100, 'en-US', 2)
     .then(transcription => res.send(transcription))
     .catch(err => console.log(err));
-    
 });
 
+app.get('/speech2', (req, res) => {
+    speechRec('./test4.mp3', 'MP3', 44100, 'en-US', 2)
+    .then(transcription => res.send(transcription))
+    .catch(err => console.log(err));
+});
 
 
 

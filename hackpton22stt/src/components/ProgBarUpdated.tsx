@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import useStorage from '../hooks/useStorage';
-import { motion } from 'framer-motion';
+import { Progress } from "@mantine/core";
 
-const ProgressBar = ({ file, setFile }) => {
+const ProgressBar = ({ file, setFile } : {file: any, setFile: any}) => {
   const { progress, url } = useStorage(file);
 
   useEffect(() => {
@@ -12,11 +12,8 @@ const ProgressBar = ({ file, setFile }) => {
   }, [url, setFile]);
 
   return (
-    <motion.div className="progress-bar"
-      initial={{ width: 0 }}
-      animate={{ width: progress + '%' }}
-    ></motion.div>
+    <Progress value={progress} />
   );
-} 
+};
 
 export default ProgressBar;
