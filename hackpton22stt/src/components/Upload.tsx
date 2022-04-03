@@ -1,34 +1,27 @@
 import React, { useState } from 'react';
-import ProgBar from './ProgBar';
-import Transcript from './Transcript';
-
-
-
-
+import ProgBar from './ProgBarUpdated';
+import { RingProgress } from '@mantine/core';
 
 const Upload = () => {
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState();
     const types = ['audio/mp3', 'audio/wav', 'audio/m4a', 'audio/flac', 'audio/ogg', 'audio/x-m4a', 'audio/x-flac', 'audio/x-wav', 'audio/mpeg'];
-    const [error, setError] = useState(null);
-        
- 
+    const [error, setError] = useState(String);
         
 
-    const changeHandler = (e) => {
+    const changeHandler = (e: any) => {
         let selected = e.target.files[0];
-        console.log(selected.type);
+        // console.log(selected.type);
 
         if (selected && types.includes(selected.type)) {
             setFile(selected);
-            setError(null);
+            setError("");
         } else {
-            setFile(null);
+            setFile(undefined);
             setError('Please select a valid file (mp4, wav, m4a, flac)');
         }
         
-
-
     }
+
     return (
         <div className="upload">
             <form>
@@ -39,11 +32,10 @@ const Upload = () => {
                 
                 <div className="file-label"> 
                 {error && <p className="error">{error}</p>}
-                {file && <p>{file.name}</p>}
+                {file && <p>{file['name']}</p>}
                 {file && <ProgBar file={file} setFile={setFile} />}
                 </div>
             </form>
-                
         </div>
     );
 

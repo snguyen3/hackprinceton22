@@ -3,8 +3,6 @@ import './App.css';
 import Video from './components/Video';
 import Upload from './components/Upload';
 import Transcript from './components/Transcript';
-import ListDocs from './components/ListDocs';
-
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -18,7 +16,8 @@ state = {
         <Video />
         <Upload />
         <Transcript />
-    </div>
+        {/* <TextEditor /> */}
+      </div>
     );
   }
 }

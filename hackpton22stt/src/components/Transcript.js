@@ -1,7 +1,8 @@
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
-
+import { Button, Container } from '@mantine/core';
+// import { TextEditor } from './components/TextEditor';
 class Transcript extends Component {
     constructor (props) {
         super(props);
@@ -13,15 +14,17 @@ class Transcript extends Component {
     }
 
     pdfGenerate=()=>{
-        var doc = new jsPDF();
-        doc.text(this.state.data, 10, 10);
+        var doc = new jsPDF(
+          {
+            orientation: 'portrait',
+            format: 'letter',
+            putOnlyUsedFonts: true
+          }
+        );
+        var lines = doc.splitTextToSize(this.state.data, 190);
+        doc.text(lines, 10, 10);
         doc.save('transcript.pdf');
     }
-        
-
-
-
-
 
     fetchData = async (event) => {
         event.preventDefault();
@@ -36,11 +39,36 @@ class Transcript extends Component {
 
       render() {
         return (
-          <div className="App">
-            <button onClick={this.fetchData}>Click me</button>
+            <div className="App">
+              <Container>
+                <Button 
+                  onClick={this.fetchData} 
+                  styles={(theme) => ({
+                  root: {
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                  }})}
+                >
+                Click me
+                </Button>
+              </Container>
+              
             {this.state.data==null ? null : <p>{this.state.data}</p>}
-            <button onClick={this.pdfGenerate}>Download</button>
-        </div>
+            
+            <Container size="xs">
+              <Button 
+                onClick={this.pdfGenerate} 
+                styles={(theme) => ({
+                  root: {
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                  }})}
+              >
+              Download
+              </Button>
+            </Container>
+          </div>
+        
 
 
         );
