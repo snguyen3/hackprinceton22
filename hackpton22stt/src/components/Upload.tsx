@@ -1,6 +1,6 @@
+import { TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import ProgBar from './ProgBarUpdated';
-import { RingProgress } from '@mantine/core';
 
 const Upload = () => {
     const [file, setFile] = useState();
@@ -23,14 +23,21 @@ const Upload = () => {
     }
 
     return (
-        <div className="upload">
+        <div>   
             <form>
-                <label> 
+            Add file below or type in url!
+            <TextInput 
+            radius="xl"
+            size='xs'
+            name='url' 
+            rightSectionWidth={200}
+            iconWidth={20}
+            placeholder='url' />
+                <label> + 
                     <input type="file" name="file" onChange={changeHandler}/>
-                    <span>+</span>
                 </label>
                 
-                <div className="file-label"> 
+                <div> 
                 {error && <p className="error">{error}</p>}
                 {file && <p>{file['name']}</p>}
                 {file && <ProgBar file={file} setFile={setFile} />}

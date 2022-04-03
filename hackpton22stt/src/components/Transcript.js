@@ -1,7 +1,7 @@
 import { Component, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
-import { Button, Container } from '@mantine/core';
+import { Button, Container, Center} from '@mantine/core';
 // import { TextEditor } from './components/TextEditor';
 class Transcript extends Component {
     constructor (props) {
@@ -31,7 +31,7 @@ class Transcript extends Component {
         try {
           const response = await axios.get('./speech');
         this.setState({ data: response.data[0].results.map(result => result.alternatives[0].transcript).join('\n') }); 
-        console.log(this.state.data);
+        // console.log(this.state.data);
         } catch (err) {
           console.log(err);
         }
@@ -39,6 +39,7 @@ class Transcript extends Component {
 
       render() {
         return (
+          <Center>
             <div className="App">
               <Container>
                 <Button 
@@ -49,13 +50,13 @@ class Transcript extends Component {
                     paddingRight: 20,
                   }})}
                 >
-                Click me
+                Click me to generate transcript!
                 </Button>
               </Container>
-              
-            {this.state.data==null ? null : <p>{this.state.data}</p>}
-            
-            <Container size="xs">
+
+            {/* {this.state.data==null ? null : <p>{this.state.data}</p>} */}
+            <br />
+            <Container size="md">
               <Button 
                 onClick={this.pdfGenerate} 
                 styles={(theme) => ({
@@ -64,11 +65,11 @@ class Transcript extends Component {
                     paddingRight: 20,
                   }})}
               >
-              Download
+              Download Transcript
               </Button>
             </Container>
           </div>
-        
+        </Center>
 
 
         );
