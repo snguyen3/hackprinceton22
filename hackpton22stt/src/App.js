@@ -17,7 +17,7 @@ state = {
       <AppShell header={
         <Header height={60} p="xs">
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-            <h1><strong>EZN</strong>ote</h1>
+            <h1><strong>EZN</strong>otes</h1>
           </div>
           
         </Header>
