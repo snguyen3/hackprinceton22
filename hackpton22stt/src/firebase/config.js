@@ -10,14 +10,7 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyAkDmz1agH9zX5VvTosSQycNJMb7Y6Kr1w",
-  authDomain: "hackpton22-speechtotext.firebaseapp.com",
-  projectId: "hackpton22-speechtotext",
-  storageBucket: "hackpton22-speechtotext.appspot.com",
-  messagingSenderId: "706405324114",
-  appId: "1:706405324114:web:86bc09a3032746f14d568b"
-};
+
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
