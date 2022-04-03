@@ -18,6 +18,7 @@ function speechRec (filename, encoding, sampleRateHertz, languageCode, channelCo
             sampleRateHertz: sampleRateHertz,
             languageCode: languageCode,
             channelCount: channelCount,
+            enableAutomaticPunctuation: true,
         },
         audio: {
             content: fs.readFileSync(filename).toString('base64'),
