@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+h1 {
+  font-family: "MONACO", monospace;
+  font-size: xx-large;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

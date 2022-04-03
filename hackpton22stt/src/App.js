@@ -15,8 +15,11 @@ state = {
   render() {
     return (
       <AppShell header={
-        <Header height={70} p="md">
-          <h1><strong>EZN</strong>ote</h1>
+        <Header height={60} p="xs">
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+            <h1><strong>EZN</strong>ote</h1>
+          </div>
+          
         </Header>
       }>
         <Grid>

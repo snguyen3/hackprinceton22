@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactPlayer from 'react-player';
-import { Button, Center, TextInput } from '@mantine/core';
+import { Button, Center, TextInput, Grid } from '@mantine/core';
 class Video extends Component {
 
     constructor(props) {
@@ -29,22 +29,19 @@ class Video extends Component {
             <div className="video">
             <h2>Paste a url!</h2>
             <TextInput
-              radius="xl"
-              className="input is-large is-fullwidth"
-              id="define-input"
+              radius="lg"
               placeholder="Enter a url"
               type="text"
               value={this.state.url}
               onChange={this.changeUrl}
               rightSection={
                             <Button
-                                size="xs"
+                                size="sm"
                                 onClick={this.state.posted = this.state.url}
                             >
                                 Open!
                             </Button>}
             />
-            <br />
             {/* <Button
               className="button is-info is-large"
               id="define-btn"
@@ -53,8 +50,14 @@ class Video extends Component {
               Open!
             </Button> */}
             <Center>
-                <ReactPlayer url={this.state.posted}/>
+                <ReactPlayer 
+                url={this.state.posted}
+                playIcon={<button>Play</button>}
+                />
             </Center>
+            <Grid>
+
+            </Grid>
             </div>
         );
 
